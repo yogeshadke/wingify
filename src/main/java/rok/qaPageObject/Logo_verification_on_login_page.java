@@ -1,55 +1,34 @@
 package rok.qaPageObject;
 
-import org.openqa.selenium.By;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
 
-import wrapperforweb.Webwait;
-
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.time.Duration;
-
-public class Logo_verification_on_login_page {
-
+public class Wingify_Login {
 	WebDriver ldriver;
 
-	public Logo_verification_on_login_page(WebDriver rdriver) {
+	public Wingify_Login(WebDriver rdriver) {
 		ldriver = rdriver;
 		PageFactory.initElements(rdriver, this);
 	}
-	
+	// 2.identify WebElement
 
-	@FindBy(xpath = "//img[@id= 'logo']")
-	WebElement logoElement;
-	// a[@id="forgot_password_link"]
+	@FindBy(id = "username")
+	WebElement username1;
+	@FindBy(id = "password")
+	WebElement password1;
+	@FindBy(id="log-in")
+	WebElement login;
 
-	@FindBy(xpath = "//a[@id='forgot_password_link']")
-	WebElement forgotpassword;
+	// 3.identify action on webElement
 
-	public void LogoVerification() throws MalformedURLException, IOException {
-
-		if (logoElement.isDisplayed()) {
-			System.out.println("Logo Is Present.");
-		} else {
-			System.out.println("Logo verification failed.");
-		}
+	public void passdata(String usernamecd, String passwordcd) throws InterruptedException {
+		username1.sendKeys(usernamecd);
+		password1.sendKeys(passwordcd);
+		login.click();
+		Thread.sleep(4000);
 
 	}
 
-	public void forgotpasswordlinkverify() {
-
-		// Assert.assertTrue(forgotpassword.isDisplayed(), "Forgot password link is not
-		// present on the page");
-		Webwait.visibilityOfElement(ldriver, forgotpassword, Duration.ofSeconds(5000));
-		Assert.assertEquals(forgotpassword.getText(), "Forgot Your Password?");
-	}
 }
